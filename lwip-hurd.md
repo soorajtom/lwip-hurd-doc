@@ -1,0 +1,13 @@
+LwIP-hurd is a port of [https://www.nongnu.org/lwip/2_1_x/index.html lwIP] into [https://www.gnu.org/software/hurd/index.html Hurd]. It was designed to replace the pfinet translator. The development of the lwip-hurd was carried out by Joan Lledó as part of the Google Summer of Code(GSoC) 2017. He has documented the process as a blog [http://darnassus.sceen.net/~jlledom/en/ here].
+
+==Building the translator==
+===Installing the lwIP libraries===
+The core libraries of lwIP need to be installed before building the translator. The libraries can be installed by either:
+* Installing as the Debian package [https://salsa.debian.org/debian/lwip https://salsa.debian.org/debian/lwip].
+* Building from source [https://github.com/jlledom/liblwip-hurd#how-to-build https://github.com/jlledom/liblwip-hurd#how-to-build]
+===Building lwIP===
+The lwIP translator is built while building hurd from the source if the lwIP libraries are already installed. To make the lwIP translator alone, follow the [https://www.gnu.org/software/hurd/hurd/building.html steps to configure] the Hurd installation and use <code>make lwip</code>.
+
+The translator can be tested using
+ settrans -fgap /servers/socket/2 ~/path/to/build/lwip/lwip -i /dev/eth0 -a a.b.c.d -g e.f.g.h -m i.j.k.l
+where a.b.c.d is the IP address for the device, e.f.g.h is the default gateway and i.j.k.l is the netmask.
