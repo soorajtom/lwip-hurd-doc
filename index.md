@@ -17,3 +17,6 @@ The translator can be tested using
 `settrans -fgap /servers/socket/2 ~/path/to/build/lwip/lwip -i /dev/eth0 -a a.b.c.d -g e.f.g.h -m i.j.k.l`
 where `a.b.c.d` is the IP address for the device, `e.f.g.h` is the default gateway and `i.j.k.l` is the netmask.
 
+## Contents
+
+* [Files](/files)
