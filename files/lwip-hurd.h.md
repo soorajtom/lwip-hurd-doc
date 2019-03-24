@@ -2,7 +2,7 @@ This file contains the global declarations of port classes, structures, etc for 
 
 #### struct port_bucket *lwip_bucket ####
 
-The port bucket for lwip. All messages recieved are processed by the [lwip_demuxer()](/main.c).
+The port bucket for lwip. All messages recieved are processed by the [lwip_demuxer()](/files/main.c).
 
 #### struct port_class *socketport_class ####
 
