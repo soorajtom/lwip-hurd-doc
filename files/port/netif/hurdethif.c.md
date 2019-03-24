@@ -30,10 +30,15 @@ The ethernet devices module
     void
     hurdethif_input (struct netif *netif, struct net_rcv_msg *msg)
 
+This function attaches the new packet to the pbuf chain and calls input function of the netif. TODO: attaching to pbuff chain
+
 #### hurdethif_demuxer() ####
 
     int
     hurdethif_demuxer (mach_msg_header_t * inp, mach_msg_header_t * outp)
+
+This is the demuxer function that handles all the incoming RPCs from the device.
+First, it extracts the local port to which the mesasge was sent. This port is then matched with available interfaces. If a matching interface is not found, 1 is returned. Otherwise, *hurdethif_input* is called with the corresponding interafce and the message.
 
 #### hurdethif_device_update_mtu() ####
 
@@ -50,12 +55,16 @@ The ethernet devices module
     error_t
     hurdethif_device_init (struct netif * netif)
 
-#### hurdethif_input_thread() ####
+#### hurdethif_input_thread()
 
     static void *
     hurdethif_input_thread (void *arg)
 
-#### hurdethif_module_init() ####
+Attaches *hurdethif_demuxer* to handle messages to *ethport-bucket*.
+
+#### hurdethif_module_init()
 
     error_t
- hurdethif_module_init ()
+    hurdethif_module_init ()
+
+This function initializes the thread for incoming data. It creates *etherport-bucket* and its port class. It then creates a pthread and links *hurdethif_input_thread* to it. The pthread is then detached.
