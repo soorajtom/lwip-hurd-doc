@@ -31,6 +31,7 @@ A switch-case statement runs over the allowed options.
 * 'A' - sets ipv6 address: The address provided is validated(how?) and set.
 * ARGP_KEY_INIT - This value is passed by the parsing lib before any parsing is done. At this point, the initialisations are done. A new *parse_hook* is allocated and attached to the *state* variable. A new empty interface is also added to the hook.
 * ARGP_KEY_ERROR - This value is recieved at a parsing error. The interfaces allocated and the parse hook are freed.
+* ARGP_KEY_SUCCESS - Completed the parsing successfully. The LwIP stack is ready to be intialized. [tcpip_init()](https://www.nongnu.org/lwip/2_1_x/group__lwip__os.html#ga1f3a88b8df6ba3b9ed1c00e0a305e3db) is called if the interface list is empty and [init_fs()](/files/lwip-util.c) is called if the interface list is non-empty (ie, a previous configuration exists and there is no need to initialize the whole stack). 
 
 #### trivfs_append_args() ####
 
