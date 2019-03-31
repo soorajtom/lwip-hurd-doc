@@ -4,9 +4,13 @@ Common interface functions for all kinds of devices.
     static error_t
     if_open (struct netif *netif)
 
+Opens the device and sets the interface up.
+
 #### if_close() #####
     static error_t
     if_close (struct netif *netif)
+
+Closes the device and sets the interface down.
 
 #### if_init() #####
     error_t
@@ -25,3 +29,5 @@ Tries to close the device and frees the resources. The device is closed ([if_clo
 #### if_change_flags #####
     error_t
     if_change_flags (struct netif * netif, uint16_t flags)
+
+Changes device flags for netif. It also closes or opens the device accordingly.

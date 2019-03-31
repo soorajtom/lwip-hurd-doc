@@ -4,6 +4,11 @@ This is the translator entry point.
 
     error_t trivfs_goaway (struct trivfs_control *fsys, int flags)
 
+* If it is a forced goaway, exit(0) is called.
+* Else, all further requests are blocked.
+* If there are still ports in the `socketport_class` or `addrport_class`, the RPCs are resumed and the goaway is not going to happen.
+* Otherwise, exit(0) is called.
+
 #### lwip_demuxer() ####
 
     int lwip_demuxer (mach_msg_header_t * inp, mach_msg_header_t * outp)
