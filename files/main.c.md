@@ -9,13 +9,17 @@ This is the translator entry point.
 * If there are still ports in the `socketport_class` or `addrport_class`, the RPCs are resumed and the goaway is not going to happen.
 * Otherwise, exit(0) is called.
 
-#### lwip_demuxer() ####
+#### lwip_demuxer()* ####
 
     int lwip_demuxer (mach_msg_header_t * inp, mach_msg_header_t * outp)
+
+Messages to the `lwip_bucket` are handled and demultiplexed here.
 
 #### translator_bind() ####
 
     void translator_bind (int portclass, const char *name)
+
+Installs portclass on node NAME. This is called on command line options `4` and `6` for installing IPv4 and IPv6 translators respectively.
 
 #### main ####
 
