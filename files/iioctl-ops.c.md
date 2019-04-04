@@ -22,7 +22,7 @@ Returns the specified TYPE of address of the interface.
                     ifname_t ifnam,
                     short flags)
 
-Sets flags for a network interface using [if_change_flags](/files/port/netif/ifcommon.c).
+Sets flags for a network interface using [if_change_flags](../../files/port/netif/ifcommon.c).
 
 #### lwip_S_iioctl_siocgifflags() ####
 
