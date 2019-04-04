@@ -19,4 +19,4 @@ where `a.b.c.d` is the IP address for the device, `e.f.g.h` is the default gatew
 
 ## Contents
 
-* [Files](../files)
+* [[Files]]
