@@ -1,5 +1,7 @@
 The ethernet devices module
 
+[[!toc  ]]
+
 #### hurdethif_device_get_flags() ####
 
     static error_t
@@ -23,6 +25,19 @@ Sets the device flags.
     static error_t
     hurdethif_device_open (struct netif *netif)
 
+Opens the device using the [device interface](https://www.gnu.org/software/hurd/gnumach-doc/Device-Interface.html#Device-Interface).
+
+* Gets the [netif state](../ifcommon.c).
+* Creates a new port in the etherport_bucket and assigns it to netif->readpt.
+* Inserts a port-send right to the port and sets the queue limit.
+* [file_name_lookup](https://www.gnu.org/software/hurd/hurd/glibc/hurd-specific_api.html) on the `netif->devname` returns the port to the device file.
+* If the lookup returns a port,
+  * The device is then opened using [device_open](https://www.gnu.org/software/hurd/gnumach-doc/Device-Open.html) returning a port to the device to `ethif->etherport`.
+  * Sets filter for the messages from the device using [device_set_filter](https://www.gnu.org/software/hurd/gnumach-doc/Device-Filter.html) to `bpf_ether_filter`(Explain).
+* else
+  * [get_privileged_ports](https://www.gnu.org/software/hurd/hurd/glibc/hurd-specific_api.html) fetches the device master port.
+  * The device is then opened using [device_open](https://www.gnu.org/software/hurd/gnumach-doc/Device-Open.html) returning a port to the device to `ethif->etherport`.
+  * Sets filter for the messages from the device using [device_set_filter](https://www.gnu.org/software/hurd/gnumach-doc/Device-Filter.html) to `ether_filter`(Explain).
 
 
 #### hurdethif_device_close() ####
