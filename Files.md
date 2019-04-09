@@ -20,10 +20,10 @@ lwip
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── hurdtunif.h  
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── ifcommon.h  
 │&nbsp;&nbsp;&nbsp;└── netif/  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[hurdethif.c]]  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[hurdloopif.c]]  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[hurdtunif.c]]  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [[ifcommon.c]]  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[port/netif/hurdethif.c]]  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[port/netif/hurdloopif.c]]  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [[port/netif/hurdtunif.c]]  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [[port/netif/ifcommon.c]]  
 ├── [[port-objs.c]]  
 ├── [[socket-ops.c]]  
 ├── [[startup.c]]  
