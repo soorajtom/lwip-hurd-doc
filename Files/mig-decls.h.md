@@ -41,28 +41,3 @@ Calls [`ports_lookup_payload()`](https://www.gnu.org/software/hurd/doc/hurd_4.ht
 	end_using_sockaddr_port (struct sock_addr *addr)
 
 Calls ports_port_deref(). See [the mail thread](https://marc.info/?l=hurd-bug&m=121966329010773&w=2) for details.
-
-####  ####
-
-	
-
-
-
-####  ####
-
-	
-
-
-
-####  ####
-
-	
-
-
-
-####  ####
-
-	
-
-
-
