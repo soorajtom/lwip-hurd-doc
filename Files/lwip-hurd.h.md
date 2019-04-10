@@ -1,32 +1,4 @@
-This file contains the global declarations of port classes, structures, etc for the translator.
-
-#### struct port_bucket *lwip_bucket ####
-
-The port bucket for lwip. All messages recieved are processed by the [lwip_demuxer()](/files/main.c).
-
-#### struct port_class *socketport_class ####
-
-
-#### struct port_class *addrport_class ####
-
-
-#### struct port_class *shutdown_notify_class ####
-
-
-#### struct port_class *lwip_protid_portclasses[2] ####
-
-
-#### struct port_class *lwip_cntl_portclasses[2] ####
-
-
-#### int lwip_bootstrap_portclass ####
-
-
-#### mach_port_t fsys_identity ####
-
-
-#### struct trivfs_control *lwipcntl ####
-
+This file contains the global declarations of port classes, structures and functions for the translator.
 
 #### Address family port class ####
 
@@ -35,6 +7,8 @@ The port bucket for lwip. All messages recieved are processed by the [lwip_demux
       PORTCLASS_INET,
       PORTCLASS_INET6,
     }
+
+Enum used while binding translator to specify the address family (IPv4 or IPv6).
 
 #### socket ####
 
@@ -45,6 +19,8 @@ The port bucket for lwip. All messages recieved are processed by the [lwip_demux
       refcount_t refcnt;
     }
 
+The socket structure.
+
 #### sock_user ####
 
     struct sock_user
@@ -53,6 +29,8 @@ The port bucket for lwip. All messages recieved are processed by the [lwip_demux
       int isroot;
       struct socket *sock;
     }
+
+The user using the socket. Multiple sock_user's can point to the same socket.
 
 #### sock_addr ####
 
@@ -66,9 +44,12 @@ The port bucket for lwip. All messages recieved are processed by the [lwip_demux
       } address;
     }
 
+Socket address ports.
+
 #### uid_t lwip_owner ####
 
+Owner of the underlying node.
 
 #### uid_t lwip_group ####
 
-
+User group of the underlying node.

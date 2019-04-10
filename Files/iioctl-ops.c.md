@@ -1,5 +1,7 @@
 Ioctls for network device configuration
 
+[[!toc]]
+
 #### get_if() ####
 
     static struct netif *

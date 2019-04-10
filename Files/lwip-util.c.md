@@ -1,5 +1,7 @@
 LwIP management module.
 
+[[!toc]]
+
 #### create_netif_state() ####
     static error_t
     create_netif_state (char *name, struct ifcommon *ifc)

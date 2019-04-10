@@ -1,5 +1,7 @@
 General input / output operations
 
+[[!toc]]
+
 #### lwip_S_io_write() ####
 
 	error_t

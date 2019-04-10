@@ -1,5 +1,7 @@
 Common interface functions for all kinds of devices.
 
+[[!toc]]
+
 #### if_open() #####
     static error_t
     if_open (struct netif *netif)

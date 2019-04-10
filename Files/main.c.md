@@ -1,5 +1,7 @@
 This is the translator entry point.
 
+[[!toc]]
+
 #### trivfs_goaway() ####
 
     error_t trivfs_goaway (struct trivfs_control *fsys, int flags)

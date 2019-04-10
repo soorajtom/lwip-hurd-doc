@@ -1,6 +1,6 @@
 The ethernet devices module
 
-[[!toc  ]]
+[[!toc]]
 
 #### hurdethif_device_get_flags() ####
 

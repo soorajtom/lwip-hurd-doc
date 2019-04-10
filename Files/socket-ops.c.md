@@ -1,5 +1,7 @@
 This file defines the [socket operations](https://www.nongnu.org/lwip/2_1_x/group__socket.html) for the lwIP stack. These functions are accessed via RPCs.
 
+[[!toc]]
+
 #### lwip_S_socket_create() ####
 
     error_t

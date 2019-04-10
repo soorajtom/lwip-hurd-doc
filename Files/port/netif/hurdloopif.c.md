@@ -1,5 +1,7 @@
 Loopback devices module.
 
+[[!toc]]
+
 #### hurdloopif_device_set_flags() ####
 
     static error_t

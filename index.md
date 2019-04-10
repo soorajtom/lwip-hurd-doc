@@ -1,3 +1,5 @@
+[[!sidebar content=""]]
+
 LwIP-hurd is a port of [lwIP](https://www.nongnu.org/lwip/2_1_x/index.html) into [Hurd](https://www.gnu.org/software/hurd/index.html). It was designed to replace the pfinet translator. The development of the lwip-hurd was carried out by Joan Lledó as part of the Google Summer of Code(GSoC) 2017. He has documented the process as a blog [here](http://darnassus.sceen.net/~jlledom/en/).
 
 ## Building the translator ##

@@ -1,5 +1,7 @@
 Tunnel devices module
 
+[[!toc]]
+
 #### enqueue() ####
 
 	static void
