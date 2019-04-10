@@ -52,6 +52,10 @@ Closes the device and destroys the link to the device. It deallocates the port, 
     static error_t
     hurdethif_output (struct netif *netif, struct pbuf *p)
 
+This function is called when the outgoing data is ready to be sent to the device.
+
+The [device_write](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.html#Device-Write) function writes the payload in the pbuff to the device. The write is repeated if it fails. A maximum of three retries are currently allowed. If the return value indicates that the device died, then it is closed and reopened.
+
 #### hurdethif_input() ####
 
     void
@@ -88,7 +92,7 @@ Releases all resources of this netif.
 
 Initializes a single device.
 
-* Allocates memory for interface state.
+* Allocates memory for the interface.
 * Sets the parameters of the interface -- state, type and callbacks.
 * Hardware intialization is done with [hurdethif_device_open](.)
 * [device_get_status](https://www.gnu.org/software/hurd/gnumach-doc/Device-Status.html) fetches the network addresses.
