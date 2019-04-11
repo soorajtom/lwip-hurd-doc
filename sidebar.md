@@ -1,3 +1,4 @@
-#### Jump to ####
+** Quick links **
 
 * [[Home|index]]
+* [[Files]]
