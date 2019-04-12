@@ -6,7 +6,16 @@ At the basic level, applications use glibc for standard networking functions (eg
 
 ### When data is sent through a socket ###
 
+Assume that we have established tcp connection with a remote device on network and are about to send data. We have to send the data using the corresponding socket.
 
+When an application wishes to send data to a socket, the standard function [`send`](https://linux.die.net/man/2/send) is called with the socket and the data as parameters.
+Gilbc then forwards the request using RPC to the lwIP translator. The [[`lwip_S_socket_send`|Files/socket-ops.c/#lwip_S_socket_send.28.29]] handles the send operation. It calls the lwip library function, `lwip_sendmsg` to send the data.
+
+The `lwip_sendmsg` function calls the [`netconn_write_partly`](https://www.nongnu.org/lwip/2_1_x/group__netconn__tcp.html#gacf9ce6f71652739d6be2ca83f7c423bf) to send the data over a TCP connection. Here the data is placed in an [`api_msg`](https://www.nongnu.org/lwip/2_1_x/structapi__msg.html) structure for further processing. The message is then posted to the global mailbox `mbox`.
+
+The tcpip_thread will call the 'api function' of the message, [`lwip_netconn_do_write`](https://www.nongnu.org/lwip/2_1_x/api__msg_8h.html#aca4545a471ead1bc673ea93fe85f7e5c) which was set by [`netconn_write_partly`](https://www.nongnu.org/lwip/2_1_x/group__netconn__tcp.html#gacf9ce6f71652739d6be2ca83f7c423bf). The [`tcp_write`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga6b2aa0efbf10e254930332b7c89cd8c5) function then takes the pcb and prepares it for sending. First the pcb is copied directly into an oversized pbuff, then it is segmented to appropriate segments.
+
+[`tcp_write`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga6b2aa0efbf10e254930332b7c89cd8c5) does not send the data immediately. 
 
 ### When a packet is coming through a netif ###
 
