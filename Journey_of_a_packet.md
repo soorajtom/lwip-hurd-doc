@@ -8,7 +8,7 @@ At the basic level, applications use glibc for standard networking functions (eg
 
 
 
-### Incoming packet ###
+### When a packet is coming through a netif ###
 
 We are considering a TCP data packet that is coming in to the computer via an ethernet interface we had configured when the translator was attached. Each interface has its input function that handles an incoming packet. It is set as the `input` parameter in the interface structure when it is initialized. For ethernet interfaces, it is [`tcpip_input`](https://www.nongnu.org/lwip/2_1_x/group__lwip__os.html#gae510f195171bed8499ae94e264a92717).
 
@@ -21,4 +21,6 @@ The flags of the netif is checked to see if the packet has an ethernet header. I
 
 [`ip4_input()`](https://www.nongnu.org/lwip/2_1_x/ip4_8c.html#aff1f784c9f05f3d79cc1a921d840501b) is called for IPv4 packets. After some basic checks of the IP header such as packet size being at least larger than the header size, etc, it is sent to the next layer for processing corresponding to the protocol.
 
-For TCP packets, [`tcp_input()`](https://www.nongnu.org/lwip/2_1_x/tcp__in_8c.html#ae70c3c99d9dd6b07f7e11f7ba5eedcb5) is called. It verifies the TCP header, demultiplexes the segment between the PCBs and passes it on to `tcp_process()`, which implements the TCP finite state machine. Since the packet is data for an application, `tcp_process()` sets the `recv_data` which points to the pbuff that goes to the application. The `tcp_input()` then call the `TCP_EVENT_RECV` which notifies the application that the data has been recieved.
+For TCP packets, [`tcp_input()`](https://www.nongnu.org/lwip/2_1_x/tcp__in_8c.html#ae70c3c99d9dd6b07f7e11f7ba5eedcb5) is called. It verifies the TCP header, demultiplexes the segment between the PCBs and passes it on to `tcp_process()`, which implements the TCP finite state machine. Since the packet is data for an application, `tcp_process()` sets the `recv_data` which points to the pbuff that goes to the application. The `tcp_input()` then call the `TCP_EVENT_RECV` which notifies the application that the data has been recieved. The `recv` callback for the pcb is then called which must be set to `recv_tcp` which posts the pbuff to the recieve mailbox, [`recvmbox`](https://www.nongnu.org/lwip/2_1_x/structnetconn.html#a9f2bf6a3865b6a22a8a71ec2f3e770da).
+
+The next time the application calls `recv` function on the socket, the data is read from the mailbox and it is given to the application.
