@@ -1,6 +1,6 @@
 ## Journey of a packet ##
 
-LwIP is a free TCP/IP stack aimed to embedded systems and carefully designed to be highly portable. 
+LwIP is a free TCP/IP stack aimed for embedded systems and carefully designed to be highly portable. 
 
 At the basic level, applications use glibc for standard networking functions (eg. socket create operation). In Hurd, glibc uses IPC to send messages to the lwIP translator that implements the function. On the other end, lwIP translator uses IPC to communicate with the device driver corresponding to the network device to send or receive data.
 
@@ -15,7 +15,7 @@ Gilbc then forwards the request using RPC to the lwIP translator. The [[`lwip_S_
 
 The `lwip_sendmsg` function calls the [`netconn_write_partly`](https://www.nongnu.org/lwip/2_1_x/group__netconn__tcp.html#gacf9ce6f71652739d6be2ca83f7c423bf) to send the data over a TCP connection. Here the data is placed in an [`api_msg`](https://www.nongnu.org/lwip/2_1_x/structapi__msg.html) structure for further processing. The message is then posted to the global mailbox `mbox`.
 
-The tcpip_thread will call the 'api function' of the message, [`lwip_netconn_do_write`](https://www.nongnu.org/lwip/2_1_x/api__msg_8h.html#aca4545a471ead1bc673ea93fe85f7e5c) which was set by [`netconn_write_partly`](https://www.nongnu.org/lwip/2_1_x/group__netconn__tcp.html#gacf9ce6f71652739d6be2ca83f7c423bf). The [`tcp_write`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga6b2aa0efbf10e254930332b7c89cd8c5) function then takes the pcb and prepares it for sending. First the pcb is copied directly into an oversized pbuff, then it is segmented to appropriate segments.
+The tcpip_thread will call the 'api function' of the message, [`lwip_netconn_do_write`](https://www.nongnu.org/lwip/2_1_x/api__msg_8h.html#aca4545a471ead1bc673ea93fe85f7e5c) which was set by [`netconn_write_partly`](https://www.nongnu.org/lwip/2_1_x/group__netconn__tcp.html#gacf9ce6f71652739d6be2ca83f7c423bf). The [`tcp_write`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga6b2aa0efbf10e254930332b7c89cd8c5) function then takes the pcb and prepares it for sending. First, the pcb is copied directly into an oversized pbuff, then it is segmented to appropriate segments.
 
 [`tcp_write`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga6b2aa0efbf10e254930332b7c89cd8c5) does not send the data immediately. [`tcp_output`](https://www.nongnu.org/lwip/2_1_x/group__tcp__raw.html#ga0cbcc6d628f644a530daf629fa3e5f7f) is called after `tcp_write` to send the packets that are ready to be sent. Next, `tcp_output_segment` is called to send the TCP segment over IP.
 
@@ -30,7 +30,7 @@ We are considering a TCP data packet that is coming in to the computer via an et
 During the [[hardware intialization|Files/port/netif/hurdethif.c/#hurdethif_device_init.28.29]], a filter is set on the device to forward the specified kind of messages to the ethernet port bucket.  
 The driver sends the packet to that port. The port is set to send all incoming messages to [[hurdethif_demuxer|Files/port/netif/hurdethif.c/#hurdethif_demuxer.28.29]]. The demuxer function calls the [[hurdethif_input|Files/port/netif/hurdethif.c/#hurdethif_input.28.29]]. It allocates memory for the packet, copies the data and calls the `netif->input` function assigned (currently [`tcpip_input`](https://www.nongnu.org/lwip/2_1_x/group__lwip__os.html#gae510f195171bed8499ae94e264a92717)).  
 
-The packet is now in the core lwip libraries. B)
+The packet is now in the core lwip libraries.
 
 The flags of the netif is checked to see if the packet has an ethernet header. If it does, [tcpip_inpkt](https://www.nongnu.org/lwip/2_1_x/tcpip_8h.html#a93043b3c66dbe4a15a60299c6199d102) is called with [`ethernet_input`](https://www.nongnu.org/lwip/2_1_x/group__lwip__nosys.html#ga6a10c58b82c56d02c48b3cfa2c2494ff) as the input function. In `ethernet_input`, the packet type is determined to call the corresponding function (IP, ARP, PPPoE discovery, etc.).
 

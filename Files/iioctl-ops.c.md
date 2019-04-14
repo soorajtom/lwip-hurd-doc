@@ -17,6 +17,14 @@ Returns the interface with the given NAME.
 
 Returns the specified TYPE of address of the interface.
 
+#### siocsifXaddr() ####
+
+    static kern_return_t
+    siocsifXaddr (struct sock_user *user,
+              ifname_t ifnam, sockaddr_t * addr, enum siocgif_type type)
+
+Sets the sockaddr type for an interface. Uses [[`inquire_device`|Files/lwip-util.c/#inquire_device.28.29]] to get the addresses and [[`configure_device`|Files/lwip-util.c/#configure_device.28.29]] to set the same.?
+
 #### lwip_S_iioctl_siocsifflags() ####
 
     kern_return_t

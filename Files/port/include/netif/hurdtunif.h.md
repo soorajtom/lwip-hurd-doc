@@ -1,5 +1,5 @@
 
-Datastructure definitions and function declarations for [[hurdtunif.c]]
+Data structure definitions and function declarations for [[hurdtunif.c]]
 
 
 #### struct pbufqueue ####
@@ -11,7 +11,7 @@ Datastructure definitions and function declarations for [[hurdtunif.c]]
 	  uint8_t len;
 	};
 
-This is the queue of the data in the tunnel.
+This is the queue for pbuff in the tunnel.
 
 #### struct hurdtunif ####
 

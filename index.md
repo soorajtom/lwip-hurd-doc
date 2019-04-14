@@ -23,4 +23,6 @@ where `a.b.c.d` is the IP address for the device, `e.f.g.h` is the default gatew
 
 ## Contents
 
+* [[Startup]]
 * [[Files]]
+* [[Journey_of_a_packet]]

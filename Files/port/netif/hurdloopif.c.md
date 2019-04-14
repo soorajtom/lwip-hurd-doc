@@ -28,4 +28,4 @@ Releases all resources of the netif.
     err_t
     hurdloopif_device_init (struct netif *netif)
 
-Initializes the loopback interface.
+Initializes the loopback interface. Sets the device name and type, MTU, flags and the callbacks. There are no open or close callbacks (There is no 'device').

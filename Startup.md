@@ -1,7 +1,7 @@
 ## How it all begins.. ##
 
 *For each supported PF_\* protocol family (domain), there is a file /servers/socket/N where N is the numeric value for the PF_\* symbol.*  
--- [Hurd networking](https://www.gnu.org/software/hurd/hurd/networking.html)
+for details, see [Hurd networking](https://www.gnu.org/software/hurd/hurd/networking.html)
 
 For using the lwIP stack for networking, the translator is attached to the corresponding `/servers/socket/N` node.
 
@@ -13,7 +13,7 @@ attaches the translator where `a.b.c.d` is the IP address for the device, `e.f.g
 
 #### Translator startup ####
 
-The execution starts in [[main.c]] where the [[ethernet and tunneling modules are initialized|Files/port/netif/hurdethif.c#hurdethif_module_init.28.29]]. Then it moves on to option parsing which is where the interafces get initialized (See below).
+The execution starts in [[Files/main.c]] where the [[ethernet and tunneling modules are initialized|Files/port/netif/hurdethif.c#hurdethif_module_init.28.29]]. Then it moves on to option parsing which is where the interafces get initialized (See below).
 
 #### Argument parsing ####
 
@@ -23,7 +23,7 @@ The [[init_ifs()|Files/lwip-util.c/#init_ifs.28.29]] function initializes the in
 
 #### Device initialization ####
 
-See [[hurdethif.c#hurdethif_device_init|Files/port/netif/hurdethif.c/#hurdethif_device_init.28.29]] for the detailed description of the function. It calls the [[hurdethif_device_open|Files/port/netif/hurdethif.c/#hurdethif_device_open.28.29]] function which sets a filter to forward filtered messages to the netif's port.
+See [[hurdethif_device_init|Files/port/netif/hurdethif.c/#hurdethif_device_init.28.29]] for the detailed description of the function. It calls the [[hurdethif_device_open|Files/port/netif/hurdethif.c/#hurdethif_device_open.28.29]] function which sets a filter to forward filtered messages to the netif's port.
 
 When a message at the device arrives in the ethernet port bucket, it gets demuxed to the [[input|Files/port/netif/hurdethif.c/#hurdethif_input.28.29]] function for pushing it onto the stack. 
 

@@ -1,4 +1,4 @@
-Tunnel devices module
+Standard functions for the tunnel interface. This file also implements the io interface.
 
 [[!toc]]
 
@@ -14,7 +14,7 @@ Adds an new pbuf to the end of the queue.
 	static struct pbuf *
 	dequeue (struct pbufqueue *q)
 
-Gets from the head of the queue.
+Gets a pbuf from the head of the queue. Returns NULL if the queue is empty.
 
 #### hurdtunif_device_update_mtu() ####
 
@@ -38,7 +38,7 @@ Sets the device flags.
 Releases all resources of this interface.
 
 * The pbuf is completely freed by calling [`pbuf_free`](https://www.nongnu.org/lwip/2_1_x/group__pbuf.html#gab0dd696fb4b6bc65e548944584f1738b) repeatedly.
-* The condition variables are `read` and `select` are destroyed [`pthread_cond_destroy`](https://linux.die.net/man/3/pthread_cond_destroy).
+* The condition variables are `read` and `select` are destroyed using [`pthread_cond_destroy`](https://linux.die.net/man/3/pthread_cond_destroy).
 * The mutex lock object is destroyed using [`pthread_mutex_destroy`](https://linux.die.net/man/3/pthread_mutex_destroy).
 * The network interface hook is freed.
 
@@ -50,7 +50,7 @@ Releases all resources of this interface.
 
 Enqueues the data.
 
-* A copy of the `pbuff` is made.
+* A copy of the `pbuf` is made.
 * The interface mutex lock is set.
 * If the pbuff chain is longer than 128, the oldest pbuff is dequeued and freed.
 * The new pbuff is enqueued.

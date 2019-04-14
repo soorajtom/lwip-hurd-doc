@@ -1,4 +1,4 @@
-The ethernet devices module
+The ethernet devices module. This file takes care of the device initialization and shutdown, handling of incoming and outgoing network packets from/to network devices and the hurdethif-thread.
 
 [[!toc]]
 
@@ -27,14 +27,14 @@ Sets the device flags.
 
 Opens the device using the [device interface](https://www.gnu.org/software/hurd/gnumach-doc/Device-Interface.html#Device-Interface).
 
-* Gets the [netif state](../ifcommon.c).
+* Gets the [[netif state|include/netif/ifcommon.h]].
 * Creates a new port in the etherport_bucket and assigns it to netif->readpt.
 * Inserts a port-send right to the port and sets the queue limit.
 * [file_name_lookup](https://www.gnu.org/software/hurd/hurd/glibc/hurd-specific_api.html) on the `netif->devname` returns the port to the device file.
 * If the lookup returns a port,
   * The device is then opened using [device_open](https://www.gnu.org/software/hurd/gnumach-doc/Device-Open.html) returning a port to the device to `ethif->etherport`.
   * Sets filter for the messages from the device using [device_set_filter](https://www.gnu.org/software/hurd/gnumach-doc/Device-Filter.html) to `bpf_ether_filter`(Explain).
-* else
+* else (it might be a Mach device)
   * [get_privileged_ports](https://www.gnu.org/software/hurd/hurd/glibc/hurd-specific_api.html) fetches the device master port.
   * The device is then opened using [device_open](https://www.gnu.org/software/hurd/gnumach-doc/Device-Open.html) returning a port to the device to `ethif->etherport`.
   * Sets filter for the messages from the device using [device_set_filter](https://www.gnu.org/software/hurd/gnumach-doc/Device-Filter.html) to `ether_filter`(Explain).
@@ -76,7 +76,7 @@ First, it extracts the local port to which the mesasge was sent. This port is th
     static error_t
     hurdethif_device_update_mtu (struct netif *netif, uint32_t mtu)
 
-Updates the interface's MTU and the BPF filter.
+Updates the interface's [MTU](https://en.wikipedia.org/wiki/Maximum_transmission_unit) and the [BPF](https://en.wikipedia.org/wiki/Berkeley_Packet_Filter) filter.
 
 #### hurdethif_device_terminate() ####
 
@@ -106,11 +106,11 @@ Initializes a single device.
     static void *
     hurdethif_input_thread (void *arg)
 
-Attaches *hurdethif_demuxer* to handle messages to *ethport-bucket*.
+Attaches [[`hurdethif_demuxer`|hurdethif.c#hurdethif_demuxer.28.29]] to handle messages to `ethport-bucket` using [`ports_manage_port_operations_one_thread`](http://www.hep.by/gnu/hurd/hurd_24.html).
 
 #### hurdethif_module_init()
 
     error_t
     hurdethif_module_init ()
 
-This function initializes the thread for incoming data. It creates *etherport-bucket* and its port class. It then creates a pthread and links *hurdethif_input_thread* to it. The pthread is then detached.
+This function initializes the module for incoming data. It creates `etherport-bucket` and its port class. It then creates a pthread and links `hurdethif_input_thread` to it. The pthread is then detached.
