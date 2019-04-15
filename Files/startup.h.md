@@ -1,3 +1,3 @@
 
 
-Declaration for the [shudown notification function](../startup.c).
+Declaration for the [[shudown notification function|startup.c]].

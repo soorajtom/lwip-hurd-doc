@@ -1,4 +1,4 @@
-Standard functions for the tunnel interface. This file also implements the io interface.
+Standard functions for the tunnel interface. This file also implements the io interface. The functions with `trivfs_S_`  are implementation of this interface.
 
 [[!toc]]
 

@@ -1,5 +1,5 @@
 
-pfinet operations.
+Operations offered by the stack.
 
 #### dev_ifconf() ####
 

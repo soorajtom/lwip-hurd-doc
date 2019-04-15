@@ -1,4 +1,4 @@
-General input / output operations
+General input / output operations. Implements *io.defs* interface.
 
 [[!toc]]
 

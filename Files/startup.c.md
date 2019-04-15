@@ -1,4 +1,4 @@
-startup.c
+Handler for SIGTERM to be called at shutdown.
 
 #### sigterm_handler() ####
 

@@ -1,4 +1,4 @@
-Ioctls for network device configuration
+Ioctls for network device configuration. Implements *iioctl.defs* interface.
 
 [[!toc]]
 

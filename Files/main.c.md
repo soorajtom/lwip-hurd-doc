@@ -1,4 +1,4 @@
-This is the translator entry point.
+The translator entrypoint.
 
 [[!toc]]
 
