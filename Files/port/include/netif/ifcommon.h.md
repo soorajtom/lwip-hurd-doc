@@ -21,6 +21,7 @@ Common interface definitions for all kinds of devices.
 	};
 
 Helper struct to hold private data used to operate the interface.
+[[Ethetnet|netif/hurdethif.c]] and [[loopback|netif/hurdloopif.c]] interfaces use this structure directly and the [[tunnel interface|netif/hurdtunif.c]] uses this with some more parameters of its own.
 
 #### netif_get_state() ####
 

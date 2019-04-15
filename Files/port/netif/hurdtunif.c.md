@@ -7,7 +7,10 @@ Standard functions for the tunnel interface. This file also implements the io in
 	static void
 	enqueue (struct pbufqueue *q, struct pbuf *p)
 
-Adds an new pbuf to the end of the queue.
+	*q - the queue to which the new pbuf will be attached
+	*p - the new pbuf
+
+Adds an new pbuf `*p` to the end of the queue `*q`.
 
 #### dequeue() ####
 
@@ -48,6 +51,10 @@ Releases all resources of this interface.
 	hurdtunif_output (struct netif *netif, struct pbuf *p,
 			  const ip4_addr_t * ipaddr)
 
+	*netif  - the interface in question
+	*p      - the pbuf about to be attached to the interface's queue
+	*ipaddr - not used
+
 Enqueues the data.
 
 * A copy of the `pbuf` is made.
@@ -66,7 +73,7 @@ Sets up the tunnel device.
 
 * Allocates memory for the interface.
 * The state for the interface is copied to the state parameter.
-* The device type is set as `ARPHRD_TUNNEL`.
+* The device type is set as `ARPHRD_TUNNEL` (more about the flags [here](http://man7.org/linux/man-pages/man7/netdevice.7.html)).
 * The MTU for the device is set to `TCP_MSS + 20 + 20` (MTU = MSS + IP header + TCP header).
 * The callbacks for the interface is set. (The open and close callbacks are NULL?)
 * Binds the translator to the device file.
@@ -86,14 +93,18 @@ Sets the libports classes.
 	static error_t
 	check_open_hook (struct trivfs_control *cntl, struct iouser *user, int flags)
 
-Checks if the interface is available for exclusive usage and opens it. Returns `EBUSY` if a user is already using it.
+	*cntl  - identifies the node being opened. Used for identifying the right tunif
+	*user  - user requesting access
+	*flags - flags from the open
+
+Assigned to [`*trivfs_check_open_hook`](https://www.gnu.org/software/hurd/doc/hurd_6.html#IDX116). Checks if the interface is available for exclusive usage and opens it. Returns `EBUSY` if a user is already using it.
 
 #### pi_destroy_hook() ####
 
 	static void
 	pi_destroy_hook (struct trivfs_protid *cred)
 
-Checks if it is the current user that is using the interface. If yes, releases the interface for other users.
+Assigned to [`*trivfs_protid_destroy_hook`](https://www.gnu.org/software/hurd/doc/hurd_6.html#IDX119). Checks if it is the current user that is using the interface. If yes, releases the interface for other users.
 
 #### trivfs_S_io_read() ####
 

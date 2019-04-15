@@ -7,12 +7,18 @@ The ethernet devices module. This file takes care of the device initialization a
     static error_t
     hurdethif_device_get_flags (struct netif *netif, uint16_t * flags)
 
+    *netif - the interface in question
+    *flags - pointer to return the flags
+
 Gets the device flags. [device_get_status](https://www.gnu.org/software/hurd/gnumach-doc/Device-Status.html) gets the device status which contains the flags.
 
 #### hurdethif_device_set_flags() ####
 
     static error_t
     hurdethif_device_set_flags (struct netif *netif, uint16_t flags)
+
+    *netif - the interface in question
+    flags  - the flags to be set
 
 Sets the device flags.
 
@@ -49,8 +55,11 @@ Closes the device and destroys the link to the device. It deallocates the port, 
 
 #### hurdethif_output() ####
 
-    static error_t
+    static err_t
     hurdethif_output (struct netif *netif, struct pbuf *p)
+
+    *netif - the interface in question
+    *p     - pbuff ready to be sent
 
 This function is called when the outgoing data is ready to be sent to the device.
 
@@ -61,7 +70,10 @@ The [device_write](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.ht
     void
     hurdethif_input (struct netif *netif, struct net_rcv_msg *msg)
 
-This function attaches the new packet to the pbuf chain and calls input function of the netif. This gets called by the demuxer when the input data is ready. TODO: attaching to pbuff chain.
+    *netif - the interface in question
+    *msg   - incoming message
+
+This function attaches the new packet to the pbuf chain and calls input function of the netif. This gets called by the demuxer when the input data is ready. TODO: explain attaching to pbuff chain.
 
 #### hurdethif_demuxer() ####
 
@@ -87,7 +99,7 @@ Releases all resources of this netif.
 
 #### hurdethif_device_init() ####
 
-    error_t
+    err_t
     hurdethif_device_init (struct netif * netif)
 
 Initializes a single device.

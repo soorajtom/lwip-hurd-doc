@@ -15,7 +15,8 @@ creates an [lwip socket](https://www.nongnu.org/lwip/2_1_x/group__socket.html#ga
 
     error_t
     lwip_S_socket_listen (struct sock_user * user, int queue_limit)
-Listens on a socket and prepares a socket of appropriate type for future accept operations.
+
+Listens on a socket and prepares a socket of appropriate type for future accept operations. Uses [lwip_listen](https://www.nongnu.org/lwip/2_1_x/sockets_8c.html#abee6ee286147cf334a1ba19f19b2e08b).
 
 #### lwip_S_socket_accept() ####
 
@@ -32,12 +33,14 @@ Return a new connection from a socket previously listened.
 
     error_t
     lwip_S_socket_connect (struct sock_user * user, struct sock_addr * addr)
+
 Connects to a socket address.
 
 #### lwip_S_socket_bind() ####
 
     error_t
     lwip_S_socket_bind (struct sock_user * user, struct sock_addr * addr)
+
 Binds a socket to an address.
 
 #### lwip_S_socket_name() ####
@@ -101,7 +104,7 @@ Finds the sockaddr name of an address. Receives a libports object and returns it
     error_t
     lwip_S_socket_shutdown (struct sock_user * user, int direction)
 
-Shutdown a socket for reading or writing.
+Shutdown a socket for reading or writing. Uses [lwip_shutdown](https://www.nongnu.org/lwip/2_1_x/sockets_8c.html#ade85c68b6673296c8fb67127b93fa4c1).
 
 #### lwip_S_socket_getopt() ####
 
