@@ -26,9 +26,9 @@ If a device is present, it must be opened from the `ifc->init()` callback.
     error_t
     if_terminate (struct netif * netif)
 
-Tries to close the device and frees the resources. The device is closed ([if_close](.)) and the terminate routine of the interface is called. It is set to [hurdethif_device_terminate](../hurdethif.c) for interfaces other than loopback.
+Tries to close the device and frees the resources. The device is closed ([if_close](.)) and the terminate routine of the interface is called. It is set to [[`hurdethif_device_terminate`|hurdethif.c/#hurdethif_device_terminate.28.29]] for interfaces other than loopback.
 
-#### if_change_flags #####
+#### if_change_flags() #####
     error_t
     if_change_flags (struct netif * netif, uint16_t flags)
 

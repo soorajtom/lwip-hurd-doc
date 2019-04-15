@@ -15,7 +15,7 @@ Returns the interface with the given NAME.
     siocgifXaddr (struct sock_user *user,
               ifname_t ifnam, sockaddr_t * addr, enum siocgif_type type)
 
-Returns the specified TYPE of address of the interface.
+Gets the specified TYPE of address of the interface.
 
 #### siocsifXaddr() ####
 
@@ -32,7 +32,7 @@ Sets the sockaddr type for an interface. Uses [[`inquire_device`|Files/lwip-util
                     ifname_t ifnam,
                     short flags)
 
-Sets flags for a network interface using [if_change_flags](../../files/port/netif/ifcommon.c).
+Sets flags for a network interface using [[`if_change_flags`|port/netif/ifcommon.c/#if_change_flags.28.29]].
 
 #### lwip_S_iioctl_siocgifflags() ####
 
@@ -48,7 +48,8 @@ Get flags of a network interface.
                      ifname_t ifnam,
                      int *metric)
 
-Returns the metric of the interface
+Gets the metric of the interface
+
 #### lwip_S_iioctl_siocsifmetric() ####
 
     kern_return_t

@@ -16,4 +16,4 @@ When ifc->ifc_ifreq == NULL, this function is being called for getting the neede
 				   vm_size_t amount,
 				   char **ifr, mach_msg_type_number_t * len)
 
-Return the list of devices in the format provided by SIOCGIFCONF in IFR, but don't return more then AMOUNT bytes. If AMOUNT is negative, there is no limit.
+Gets the list of devices in the format provided by SIOCGIFCONF in IFR, but don't return more then AMOUNT bytes. If AMOUNT is negative, there is no limit.

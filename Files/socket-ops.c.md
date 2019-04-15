@@ -9,7 +9,7 @@ This file defines the [socket operations](https://www.nongnu.org/lwip/2_1_x/grou
                   int sock_type,
                   int protocol,
                   mach_port_t * port, mach_msg_type_name_t * porttype)
-creates an [lwip socket](https://www.nongnu.org/lwip/2_1_x/group__socket.html#ga862d8f4070c66dddb979540ce9ba6a83).
+Creates an [lwip socket](https://www.nongnu.org/lwip/2_1_x/group__socket.html#ga862d8f4070c66dddb979540ce9ba6a83).
 
 #### lwip_S_socket_listen() ####
 

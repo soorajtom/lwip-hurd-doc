@@ -98,7 +98,7 @@ Calls lwip_io_select_common() after updating timeout.
 	error_t
 	lwip_S_io_stat (struct sock_user * user, struct stat * st)
 
-Returns the current status of the socket.
+Gets the current status of the socket.
 
 #### lwip_S_io_reauthenticate()* ####
 
@@ -116,7 +116,7 @@ Gets a reauthenticated port to the socket.
 				 uid_t * uids, size_t uidslen,
 				 uid_t * gids, size_t gidslen)
 
-Return another port which has been restricted to do only those things which both the current user and the newly specified user can do.
+Gets another port which has been restricted to do only those things which both the current user and the newly specified user can do.
 
 #### lwip_S_io_duplicate() ####
 
@@ -125,7 +125,7 @@ Return another port which has been restricted to do only those things which both
 			     mach_port_t * newobject,
 			     mach_msg_type_name_t * newobject_type)
 
-Returns a new port with the same semantics as the existing port.
+Gets a new port with the same semantics as the existing port.
 
 #### lwip_S_io_identity() ####
 
@@ -136,7 +136,7 @@ Returns a new port with the same semantics as the existing port.
 			    mach_port_t * fsys,
 			    mach_msg_type_name_t * fsystype, ino_t * fileno)
 
-Return the identity port for the socket.
+Gets the identity port for the socket.
 
 ****
 The rest of the functions are not supported yet.
