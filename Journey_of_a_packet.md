@@ -8,6 +8,8 @@ Please note that this is a very crude depiction of the journey of a packet. Most
 
 ### When data is sent through a socket ###
 
+[[!img img/packing.png]]
+
 Assume that we have established tcp connection with a remote device on network and are about to send data. We have to send the data using the corresponding socket.
 
 When an application wishes to send data to a socket, the standard function [`send`](https://linux.die.net/man/2/send) is called with the socket and the data as parameters.
@@ -24,6 +26,8 @@ Since it is an IPv4 packet, [`ip4_output_if`](https://www.nongnu.org/lwip/2_1_x/
 The `linkoutput` would have been set to [[`hurdethif_output`|Files/port/netif/hurdethif.c/#hurdethif_output.28.29]] function during the device init. The `hurdethif_output` then writes the packet to the device using [`device write`](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.html#Device-Write) and the device will send it over the network.
 
 ### When a packet is coming through a netif ###
+
+[[!img img/unpacking.png]]
 
 We are considering a TCP data packet that is coming in to the computer via an ethernet interface we had configured when the translator was attached. Each interface has its input function that handles an incoming packet. It is set as the `input` parameter in the interface structure when it was initialized. For ethernet interfaces, it is [`tcpip_input`](https://www.nongnu.org/lwip/2_1_x/group__lwip__os.html#gae510f195171bed8499ae94e264a92717).
 
