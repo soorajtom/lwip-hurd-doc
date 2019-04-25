@@ -1,4 +1,7 @@
+[[!img img/lwiphurd.png caption="Structure of lwIP" align="right"]]
+
 ## List of files
+
 lwip  
 ├── [[iioctl-ops.c]]  
 ├── [[io-ops.c]]  
