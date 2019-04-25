@@ -27,7 +27,7 @@ Recieves AMOUNT length of data from the socket.
 	lwip_S_io_seek (struct sock_user * user,
 			off_t offset, int whence, off_t * newp)
 
-Returns ESPIPE (Illegal seek) if user is not null and EOPNOTSUPP (Operation not supported) otherwise.?
+Returns ESPIPE (Illegal seek) if user is not null and EOPNOTSUPP (Operation not supported) otherwise.
 
 #### lwip_S_io_readable() ####
 

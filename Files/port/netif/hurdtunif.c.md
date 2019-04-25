@@ -10,7 +10,7 @@ Standard functions for the tunnel interface. This file also implements the io in
 	*q - the queue to which the new pbuf will be attached
 	*p - the new pbuf
 
-Adds an new pbuf `*p` to the end of the queue `*q`.
+Adds an new [`pbuf`](https://www.nongnu.org/lwip/2_1_x/structpbuf.html) `*p` to the end of the queue `*q`.
 
 #### dequeue() ####
 
@@ -59,8 +59,8 @@ Enqueues the data.
 
 * A copy of the `pbuf` is made.
 * The interface mutex lock is set.
-* If the pbuff chain is longer than 128, the oldest pbuff is dequeued and freed.
-* The new pbuff is enqueued.
+* If the pbuf chain is longer than 128, the oldest pbuf is dequeued and freed.
+* The new pbuf is enqueued.
 * If the `read_blocked` is set on the interface, it is set to 0 and the pthread conditions `read` and `select` are set to unblock using [`pthread_cond_broadcast`](https://linux.die.net/man/3/pthread_cond_broadcast).
 * The interface mutex lock is unset.
 
@@ -75,7 +75,7 @@ Sets up the tunnel device.
 * The state for the interface is copied to the state parameter.
 * The device type is set as `ARPHRD_TUNNEL` (more about the flags [here](http://man7.org/linux/man-pages/man7/netdevice.7.html)).
 * The MTU for the device is set to `TCP_MSS + 20 + 20` (MTU = MSS + IP header + TCP header).
-* The callbacks for the interface is set. (The open and close callbacks are NULL?)
+* The callbacks for the interface is set. (The open and close callbacks are NULL).
 * Binds the translator to the device file.
 * A new control port is created using [`trivfs_create_control`](http://www.hep.by/gnu/hurd/hurd_49.html).
 * [`file_set_translator`](https://www.gnu.org/software/hurd/hurd/interface/fs/27.html) sets the translator for future lookups to the interface file.
@@ -120,8 +120,8 @@ Reads data from an IO object.  If offset is -1, read from the object maintained 
 * Sets the mutex lock.
 * If the openmode was set to [`O_NONBLOCK`](https://www.gnu.org/software/libc/manual/html_node/Open_002dtime-Flags.html), [`EWOULDBLOCK`](http://man7.org/linux/man-pages/man3/errno.3.html) is returned.
 * Waits for the `read` pthread condition variable. The mutex lock is released and [`EINTR`](http://man7.org/linux/man-pages/man3/errno.3.html) is returned in case of error.
-* The pbuff is dequeued and memory for the pbuf is allocated.
-* The pbuff is copied to the allocated memory and the pbuff is freed.
+* The pbuf is dequeued and memory for the pbuf is allocated.
+* The pbuf is copied to the allocated memory and the pbuf is freed.
 * The mutex lock is released.
 
 #### trivfs_S_io_write() ####
@@ -139,8 +139,8 @@ Writes data to an IO object. If offset is -1, writes at the object maintained fi
 * The caller credentials are checked. If not valid, returns with `EOPNOTSUPP`.
 * Checks if the openmode is set to `O_WRITE`. If not, returns with `EBADF`.
 * Checks if the port class is correct.
-* Memory is allocated for the pbuff.
-* The data is copied onto the pbuff chain.
+* Memory is allocated for the pbuf.
+* The data is copied onto the pbuf chain.
 * The input function of the interface is called to pass it to the stack.
 
 #### trivfs_S_io_readable() ####

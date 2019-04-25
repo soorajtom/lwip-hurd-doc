@@ -1,6 +1,6 @@
 ## How it all begins.. ##
 
-*For each supported PF_\* protocol family (domain), there is a file /servers/socket/N where N is the numeric value for the PF_\* symbol.*  
+*For each supported PF_\* protocol family (domain), there is a file /servers/socket/N where N is the numeric value for the PF_\* symbol. ... Right now PF LOCAL (a.k.a. PF_UNIX or AF_UNIX) N=1, PF INET (a.k.a AF_INET) N=2 and PF INET6 (a.k.a AF_INET6) N=26 are supported.*  
 for details, see [Hurd networking](https://www.gnu.org/software/hurd/hurd/networking.html)
 
 For using the lwIP stack for networking, the translator is attached to the corresponding `/servers/socket/N` node.

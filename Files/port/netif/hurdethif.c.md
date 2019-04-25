@@ -59,11 +59,11 @@ Closes the device and destroys the link to the device. It deallocates the port, 
     hurdethif_output (struct netif *netif, struct pbuf *p)
 
     *netif - the interface in question
-    *p     - pbuff ready to be sent
+    *p     - pbuf ready to be sent
 
 This function is called when the outgoing data is ready to be sent to the device.
 
-The [device_write](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.html#Device-Write) function writes the payload in the pbuff to the device. The write is repeated if it fails. A maximum of three retries are currently allowed. If the return value indicates that the device died, then it is closed and reopened.
+The [device_write](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.html#Device-Write) function writes the payload in the pbuf to the device. The write is repeated if it fails. A maximum of three retries are currently allowed. If the return value indicates that the device died, then it is closed and reopened.
 
 #### hurdethif_input() ####
 
@@ -73,7 +73,7 @@ The [device_write](https://www.gnu.org/software/hurd/gnumach-doc/Device-Write.ht
     *netif - the interface in question
     *msg   - incoming message
 
-This function attaches the new packet to the pbuf chain and calls input function of the netif. This gets called by the demuxer when the input data is ready. TODO: explain attaching to pbuff chain.
+This function attaches the new packet to the pbuf chain and calls input function of the netif. This gets called by the demuxer when the input data is ready. TODO: explain attaching to pbuf chain.
 
 #### hurdethif_demuxer() ####
 

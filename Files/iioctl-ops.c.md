@@ -15,7 +15,7 @@ Returns the interface with the given NAME.
     siocgifXaddr (struct sock_user *user,
               ifname_t ifnam, sockaddr_t * addr, enum siocgif_type type)
 
-Gets the specified TYPE of address of the interface.
+Gets the specified TYPE of address of the interface. TYPE is the index for the address array(ADDR, NETMASK, DSTADDR, BRDADDR).
 
 #### siocsifXaddr() ####
 
@@ -23,7 +23,7 @@ Gets the specified TYPE of address of the interface.
     siocsifXaddr (struct sock_user *user,
               ifname_t ifnam, sockaddr_t * addr, enum siocgif_type type)
 
-Sets the sockaddr type for an interface. Uses [[`inquire_device`|Files/lwip-util.c/#inquire_device.28.29]] to get the addresses and [[`configure_device`|Files/lwip-util.c/#configure_device.28.29]] to set the same.?
+Sets the sockaddr type for an interface. Uses [[`inquire_device`|Files/lwip-util.c/#inquire_device.28.29]] to get the addresses, sets the type and [[`configure_device`|Files/lwip-util.c/#configure_device.28.29]] sets it.
 
 #### lwip_S_iioctl_siocsifflags() ####
 
